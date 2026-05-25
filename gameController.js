@@ -1,26 +1,15 @@
-const gameBoardUI = document.getElementById('board')
+import { createComputerBoard, createPlayerBoard } from "./gameUI.js";
+import { Players } from "./gameObjects.js";
 
-function getCoordinate(number){
-    if(number < 10){
-        return [0, Number(number)]
-    }else{
-        const arr = number.split('');
-        let [x, y] = arr;
-        return [Number(x), Number(y)]
-    }
+const player = new Players('player')
+const computer = new Players('computer')
+
+function computerAttackAI(){
+    let startPointX = (Math.floor(Math.random() * 10))
+    let startPointY = (Math.floor(Math.random() * 10))
+
+    return [startPointX, startPointY]
 }
 
-function createBoard(){
-    for(let i = 0; i < 100; i++){
-        const div = document.createElement('div');
-        div.addEventListener('click', () => {
-            div.style.pointerEvents = "none";
-            div.id = i
-            console.log(div.id);
-            console.log(getCoordinate(div.id));
-        })
-        gameBoardUI.append(div)
-    }
-}
-
-createBoard();
+createComputerBoard(computer);
+createPlayerBoard(player);

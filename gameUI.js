@@ -1,12 +1,5 @@
-import { Players } from "./gameObjects.js";
-
 const gameBoardUI = document.getElementById('board')
 const gameBoardUIComputer = document.getElementById('computer-board')
-
-const player = new Players('player')
-player.addShips();
-const computer = new Players('computer')
-computer.addShips();
 
 function getDivCoordinate(number){
     if(number < 10){
@@ -18,7 +11,7 @@ function getDivCoordinate(number){
     }
 }
 
-function renderShip(index1, index2){
+function renderShip(index1, index2, player){
     const shipsLocations = player.game.shipCoordinates;
 
     for(let i = 0; i < shipsLocations.length; i++){
@@ -29,7 +22,8 @@ function renderShip(index1, index2){
     }
 }
 
-function createPlayerBoard(){
+export function createPlayerBoard(player){
+    player.addShips();
     for(let i = 0; i < 100; i++){
         const div = document.createElement('div');
         div.id = i
@@ -38,7 +32,7 @@ function createPlayerBoard(){
         const [x, y] = getDivCoordinate(div.id);
         
         //display ship on the board
-        if(renderShip(x, y)){
+        if(renderShip(x, y, player)){
             div.classList.add("divShipStyle");
         }
         
@@ -56,13 +50,17 @@ function createPlayerBoard(){
                 div.appendChild(p);
             }
 
-            
+            //disable board if the game is over
+            if(player.game.gameOver){
+                gameBoardUI.style.pointerEvents = "none";
+            }
         })
         gameBoardUI.append(div)
     }
 }
 
-function createComputerBoard(){
+export function createComputerBoard(computer){
+    computer.addShips();
     for(let i = 0; i < 100; i++){
         const div = document.createElement('div');
         div.id = i
@@ -97,6 +95,3 @@ function createComputerBoard(){
         gameBoardUIComputer.append(div)
     }
 }
-
-createPlayerBoard();
-createComputerBoard();
