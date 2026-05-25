@@ -1,0 +1,62 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 100px;
+}
+
+#board,#computer-board {
+    display: flex;
+    flex-wrap: wrap;
+    width: 400px;
+    height: 400px;
+}
+
+#board > div {
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0px 4px 4px #C4C4C4);
+    border: 1px solid rgb(196, 210, 255);
+}
+
+#computer-board > div {
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0px 4px 4px #C4C4C4);
+    border: 1px solid rgb(196, 210, 255);
+}
+
+
+#computer-board > div:hover{
+     filter: none;
+     border: 3px dashed rgb(255, 96, 96);
+     background-color: rgb(255, 175, 175);
+     cursor: pointer;
+}
+
+.divShipStyle {
+    background-color: rgba(68, 111, 252, 0.363);
+   
+}
+
+.divStyle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.missedStyle{
+    font-size: 20px;
+    color: rgb(102, 102, 102);
+}
+
+.hitStyle{
+    background-color: rgb(255, 120, 120);
+}

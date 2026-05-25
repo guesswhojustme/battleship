@@ -28,24 +28,43 @@ class Gameboard{
              [0,0,0,0,0,0,0,0,0,0],
              [0,0,0,0,0,0,0,0,0,0]];
 
+    sunkShips = 0;
+    gameOver = false;
     recieveAttack(x,y){
-        if(this.board[x][y] === 0){
-            this.board[x][y] = 1;
+        console.log(`attacked [${x}, ${y}]`);
+        if(this.board[x][y] === 0 || this.board[x][y] === 1){
+            console.log('Missed!');
+            this.board[x][y] = '';
+            return false;
         }else{
+            console.log('Hit!');
+            console.log(`there was a ship in: [${x}, ${y}] !`);
             this.board[x][y].hit();
             this.board[x][y].isSunk();
+            console.log(this.board[x][y]);
+            if(this.board[x][y].sunk === true){
+                this.sunkShips++;
+            }
+            if(this.sunkShips === 10){
+                console.log('Game over!');
+                this.gameOver = true;
+            }
+            return true;
         }
+        // console.log(this.board);
     }
     
     queue = []
     allOccupiedCoordinates = [];
-    
+    shipCoordinates = []
     produceStartPoints(){
         let notUnique = true; 
         let startPointX = (Math.floor(Math.random() * 10))
         let startPointY = (Math.floor(Math.random() * 10))
         let points = [startPointX, startPointY];
+
         if(this.allOccupiedCoordinates.length > 0){
+            //prevents producing the same starting point twice
             while(notUnique){
                 startPointX = (Math.floor(Math.random() * 10))
                 startPointY = (Math.floor(Math.random() * 10))
@@ -76,10 +95,12 @@ class Gameboard{
         const ship = new Ship(shipLength);
         let coordinates = [];  
         let notUnique = true;
-        const shipCoordinates = [];
+        // const shipCoordinates = [];
         //add a ship horizontally
         if(number === 0){
-            // console.log('added ship horizontally');         
+            // console.log('added ship horizontally');
+
+            //runs until there is no collision and out of bounds
             while(notUnique){
                 const [startPointX, startPointY] = this.produceStartPoints();
                 const addLengthY = startPointY + ship.length
@@ -89,17 +110,21 @@ class Gameboard{
                 
                 if(addLengthY > 10){
                     // console.log('went out of bounds');
+                    //reruns the loop if out of bounds
                     continue;
                 }else{
                     let count = 0;
                     for(let i = startPointY; i < ship.length + startPointY; i++){
                         count++;
+                        //no collision
                         if(this.board[startPointX][i] === 0){
                             this.board[startPointX][i] = ship;
                             const arr = [startPointX, i];
                             coordinates.push(arr)
+                        //collision
                         }else{
                             // console.log('ship collided');
+                            //clean up
                             for(let i = startPointY; i < (count + startPointY) - 1; i++){
                                 this.board[startPointX][i] = 0;
                             }
@@ -108,11 +133,13 @@ class Gameboard{
                             break;
                         }
                     }
+                    //placing a ship is succesful
                     if(count === shipLength){
                         this.queue.push(coordinates);
                         notUnique = false;
                         break;
                     }
+                    //if placing a ship failed, run again.
                     continue;
                     }
                 }
@@ -161,7 +188,7 @@ class Gameboard{
         
         //add ship coordinate
         for(let i = 0; i < coordinates.length; i++){
-            shipCoordinates.push(coordinates[i]);
+            this.shipCoordinates.push(coordinates[i]);
             this.allOccupiedCoordinates.push(coordinates[i]);
         }
 
@@ -211,7 +238,7 @@ class Gameboard{
     
 }
 
-class Players{
+export class Players{
     constructor(name){
         this.name = name;
     }
@@ -224,13 +251,16 @@ class Players{
         }
     }
 
-    attack(){
-        
-    }
+    // attack(x, y){
+    //     console.log(`attacked [${x}, ${y}]`);
+    //     this.game.recieveAttack(x, y)
+    //     console.log(this.game.board);
+    // }
 }
 
-const p2 = new Players('player 2');
+// const p1 = new Players('player 1');
+// const p2 = new Players('player 2');
 
-p2.addShips();
-// console.log(p2.game.board);
-console.log('done');
+// console.log("this runs");
+
+// p2.game.recieveAttack(0,1);
