@@ -6,10 +6,24 @@
 
 body{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+}
+
+#boards-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 100px;
+}
+
+.board-name{
+    position: relative;
+    top: 10px;
+    font-size: 14px;
+    color: gray;
 }
 
 #board,#computer-board {
@@ -23,16 +37,15 @@ body{
     width: 40px;
     height: 40px;
     filter: drop-shadow(0px 4px 4px #C4C4C4);
-    border: 1px solid rgb(196, 210, 255);
+    border: 1px solid rgb(185, 192, 216);
 }
 
 #computer-board > div {
     width: 40px;
     height: 40px;
     filter: drop-shadow(0px 4px 4px #C4C4C4);
-    border: 1px solid rgb(196, 210, 255);
+    border: 1px solid rgb(185, 192, 216);
 }
-
 
 #computer-board > div:hover{
      filter: none;
@@ -59,4 +72,44 @@ body{
 
 .hitStyle{
     background-color: rgb(255, 120, 120);
+}
+
+#buttons-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    gap: 20px;
+}
+
+#randomize, #start{
+    font-size: 14px;
+}
+
+#randomize{
+    width: 115px;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+}
+
+#randomize:hover{
+    border: 2px dashed gray;
+    cursor: pointer;
+}
+
+#start{
+    width: 90px;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+}
+
+#start:hover{
+    border: 2px dashed gray;
+    cursor: pointer;
+}
+
+.disableBoard{
+    pointer-events: none;
 }

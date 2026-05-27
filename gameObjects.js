@@ -74,6 +74,7 @@ class Gameboard{
                     count++
                     const [x, y] = this.allOccupiedCoordinates[i];
                     if(x === points[0] && y === points[1]){
+                        count = 0;
                         // console.log('starting point matched a ship coordinate:');
                         // console.log(points);
                         break;
@@ -243,7 +244,7 @@ export class Players{
         this.name = name;
     }
     game = new Gameboard();
-
+    myTurn = false;
     addShips(){
         const arr = [4,3,3,2,2,2,1,1,1,1];
         for(let i = 0; i < arr.length; i++){
@@ -251,11 +252,6 @@ export class Players{
         }
     }
 
-    // attack(x, y){
-    //     console.log(`attacked [${x}, ${y}]`);
-    //     this.game.recieveAttack(x, y)
-    //     console.log(this.game.board);
-    // }
 }
 
 // const p1 = new Players('player 1');
