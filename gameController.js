@@ -6,11 +6,11 @@ const gameBoardUIComputer = document.getElementById('computer-board')
 const randomizeShipBtn = document.getElementById('randomize')
 const startGameBtn = document.getElementById('start');
 const body = document.querySelector('body');
+const btnContainer = document.getElementById('buttons-container');
 
 const announce = document.createElement('span')
 
 gameBoardUIComputer.classList.add('disableBoard1');
-            
 
 let player = new Players('player')
 const computer = new Players('computer');
