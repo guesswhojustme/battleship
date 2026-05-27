@@ -251,8 +251,8 @@ export class Players{
             this.game.placeShip(arr[i])
         }
     }
-
 }
+
 
 // const p1 = new Players('player 1');
 // const p2 = new Players('player 2');
