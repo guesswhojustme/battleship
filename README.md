@@ -21,7 +21,12 @@ refresh the page to restart again.
 
 live: https://guesswhojustme.github.io/battleship/
 
+
+dont mind the thought process part below, becaues you probably wont be able to understand it anyway. 
+I just want to add my thought process, problem encountered and how i solved them in here.
+
 thought process: 
+
 how to game works:
 	-guessing game.
 	-uses grid (10 x 10).
