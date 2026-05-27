@@ -9,7 +9,8 @@ const body = document.querySelector('body');
 
 const announce = document.createElement('span')
 
-gameBoardUIComputer.classList.add('disableBoard');
+gameBoardUIComputer.classList.add('disableBoard1');
+            
 
 let player = new Players('player')
 const computer = new Players('computer');
@@ -67,21 +68,28 @@ function convertToString(x, y){
 
 function checkWinner(){
     if(player.game.gameOver){
+        gameBoardUI.className = "";
+        gameBoardUIComputer.className = "";
+        gameBoardUIComputer.classList.add('dim')
         boardContainer.classList.add('disableBoard');
         console.log('Computer won the game');
         announce.textContent = 'COMPUTER WON THE GAME!';
         body.appendChild(announce);
+        
     }
     if(computer.game.gameOver){
+        gameBoardUIComputer.className = "";
+        gameBoardUI.className = "";
+        gameBoardUI.classList.add('dim')
         boardContainer.classList.add('disableBoard');
         console.log('Player won the game');
-        gameBoardUIComputer.classList.add('disableBoard');
         announce.textContent = 'YOU WON THE GAME!';
         body.appendChild(announce);
     }
 }
 
 function computerAttackAI(){
+    gameBoardUI.classList.add('dim');
     while(true){
         const [x, y] = attackCoordinates();
     
@@ -106,8 +114,7 @@ function computerAttackAI(){
             checkWinner();
         }
     }
-    gameBoardUIComputer.classList.remove('disableBoard');
-
+    gameBoardUIComputer.classList.remove('disableBoard1');
 }
 
 function getDivCoordinate(number){
@@ -176,12 +183,15 @@ function createComputerBoard(){
                 div.appendChild(p);
 
                 //disable board when its computers turn
-                gameBoardUIComputer.classList.add('disableBoard');
-                
+                gameBoardUIComputer.classList.add('disableBoard1');
+
+                gameBoardUI.classList.remove('dim');
+
                 //computer attack
                 setTimeout(function() {
                     computerAttackAI();
                 }, 500);
+
             }
 
         })
@@ -202,7 +212,8 @@ randomizeShipBtn.addEventListener('click', () => {
 })
 
 startGameBtn.addEventListener('click', () => {
-    gameBoardUIComputer.classList.remove('disableBoard');
+    gameBoardUIComputer.classList.remove('disableBoard1');
+    gameBoardUI.classList.add('dim');
     randomizeShipBtn.remove();
     startGameBtn.remove();
 })

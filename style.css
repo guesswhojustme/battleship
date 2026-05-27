@@ -34,6 +34,16 @@ body{
     height: 400px;
 }
 
+.disableBoard1{
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.dim{
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 #board > div {
     width: 40px;
     height: 40px;
